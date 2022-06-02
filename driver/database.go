@@ -39,10 +39,6 @@ func InitDB() (*gorm.DB, error) {
 
 func InitData() {
 	// 数据库自动建表
-	user := model.User{
-		Username: "testUser",
-		Password: "123456",
-	}
 	db, _ := InitDB()
 	db.AutoMigrate(&model.User{})
 	db.Create(&user)
