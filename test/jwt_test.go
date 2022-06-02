@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/stretchr/testify/assert"
 	"gorm.io/gorm"
-	"simpledy/controller"
 	"simpledy/model"
+	"simpledy/utils"
 	"testing"
 )
 
@@ -19,7 +19,7 @@ var user = model.User{
 }
 
 func TestCreateToken(t *testing.T) {
-	tokenString, err := controller.CreateToken(user)
+	tokenString, err := utils.CreateToken(user)
 	if err != nil {
 		panic(err)
 	}
@@ -27,11 +27,11 @@ func TestCreateToken(t *testing.T) {
 }
 
 func TestParseToken(t *testing.T) {
-	tokenString, err := controller.CreateToken(user)
+	tokenString, err := utils.CreateToken(user)
 	if err != nil {
 		panic(err)
 	}
-	_, claims := controller.ParseToken(tokenString)
+	_, claims := utils.ParseToken(tokenString)
 
 	assert.Equal(t, claims["id"], float64(1))
 	assert.Equal(t, claims["username"], "zhangsan")
