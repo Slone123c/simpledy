@@ -7,6 +7,11 @@ import (
 	"simpledy/model"
 )
 
+var user = model.User{
+	Username: "testUser",
+	Password: "123456",
+}
+
 func InitDB() (*gorm.DB, error) {
 	fmt.Println("开始连接数据库")
 	// 建立数据库连接
@@ -29,8 +34,16 @@ func InitDB() (*gorm.DB, error) {
 		panic(err)
 	}
 
-	// 数据库自动建表
-	db.AutoMigrate(&model.User{})
-
 	return db, err
+}
+
+func InitData() {
+	// 数据库自动建表
+	user := model.User{
+		Username: "testUser",
+		Password: "123456",
+	}
+	db, _ := InitDB()
+	db.AutoMigrate(&model.User{})
+	db.Create(&user)
 }

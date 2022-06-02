@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"simpledy/controller"
+	"simpledy/service"
 )
 
 func initRouter(r *gin.Engine) {
@@ -12,21 +12,21 @@ func initRouter(r *gin.Engine) {
 	apiRouter := r.Group("/douyin")
 
 	// basic apis
-	//apiRouter.GET("/feed/", controller.Feed)
-	//apiRouter.GET("/user/", controller.UserInfo)
-	apiRouter.POST("/user/register/", controller.Register)
-	//apiRouter.POST("/user/login/", controller.Login)
-	//apiRouter.POST("/publish/action/", controller.Publish)
-	//apiRouter.GET("/publish/list/", controller.PublishList)
+	//apiRouter.GET("/feed/", handler.Feed)
+	//apiRouter.GET("/user/", handler.UserInfo)
+	apiRouter.POST("/user/register/", service.Register)
+	//apiRouter.POST("/user/login/", handler.Login)
+	//apiRouter.POST("/publish/action/", handler.Publish)
+	//apiRouter.GET("/publish/list/", handler.PublishList)
 
 	// extra apis - I
-	//apiRouter.POST("/favorite/action/", controller.FavoriteAction)
-	//apiRouter.GET("/favorite/list/", controller.FavoriteList)
-	//apiRouter.POST("/comment/action/", controller.CommentAction)
-	//apiRouter.GET("/comment/list/", controller.CommentList)
+	//apiRouter.POST("/favorite/action/", handler.FavoriteAction)
+	//apiRouter.GET("/favorite/list/", handler.FavoriteList)
+	//apiRouter.POST("/comment/action/", handler.CommentAction)
+	//apiRouter.GET("/comment/list/", handler.CommentList)
 
 	//extra apis - II
-	//apiRouter.POST("/relation/action/", controller.RelationAction)
-	//apiRouter.GET("/relation/follow/list/", controller.FollowList)
-	//apiRouter.GET("/relation/follower/list/", controller.FollowerList)
+	//apiRouter.POST("/relation/action/", handler.RelationAction)
+	//apiRouter.GET("/relation/follow/list/", handler.FollowList)
+	//apiRouter.GET("/relation/follower/list/", handler.FollowerList)
 }

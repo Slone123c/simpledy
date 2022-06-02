@@ -20,7 +20,7 @@ func CreateToken(user model.User) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		// 定义 Claims 结构体
 		"id":          user.ID,
-		"username":    user.Name,
+		"username":    user.Username,
 		"expiredTime": expirationTime,
 	})
 
