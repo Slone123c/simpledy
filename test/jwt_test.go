@@ -19,7 +19,11 @@ var testUser = model.User{
 }
 
 func TestCreateToken(t *testing.T) {
+<<<<<<< HEAD
 	tokenString, err := utils.CreateToken(testUser)
+=======
+	tokenString, err := utils.CreateToken(user)
+>>>>>>> main
 	if err != nil {
 		panic(err)
 	}
@@ -27,7 +31,11 @@ func TestCreateToken(t *testing.T) {
 }
 
 func TestParseToken(t *testing.T) {
+<<<<<<< HEAD
 	tokenString, err := utils.CreateToken(testUser)
+=======
+	tokenString, err := utils.CreateToken(user)
+>>>>>>> main
 	if err != nil {
 		panic(err)
 	}
