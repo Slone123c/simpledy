@@ -9,6 +9,7 @@ import (
 
 func InitDB() (*gorm.DB, error) {
 	fmt.Println("开始连接数据库")
+	// 建立数据库连接
 	host := "localhost"
 	port := "3306"
 	DBName := "simpledy"
@@ -28,7 +29,8 @@ func InitDB() (*gorm.DB, error) {
 		panic(err)
 	}
 
-	db.AutoMigrate(&model.User{}) // 数据库自动建表
+	// 数据库自动建表
+	db.AutoMigrate(&model.User{})
 
 	return db, err
 }
