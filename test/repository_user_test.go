@@ -1,7 +1,9 @@
 package test
 
 import (
+	"fmt"
 	"github.com/stretchr/testify/assert"
+	"reflect"
 	"simpledy/model"
 	"simpledy/repository"
 	"testing"
@@ -50,7 +52,7 @@ func TestDeleteUserByUsername(t *testing.T) {
 	assert.Equal(t, true, res)
 }
 
-//func TestCustom(t *testing.T) {
+//func TestCustom1(t *testing.T) {
 //	var user = model.User{}
 //	e := reflect.ValueOf(&user).Elem()
 //
@@ -60,3 +62,13 @@ func TestDeleteUserByUsername(t *testing.T) {
 //		fmt.Println(varName)
 //	}
 //}
+
+func TestCustom(t *testing.T) {
+	var user = model.UserInformation{}
+	e := reflect.ValueOf(&user).Elem()
+	//result := db.Where(varName+" = ?", name).First(&user)
+	for i := 0; i < e.NumField(); i++ {
+		varName := e.Type().Field(i).Name
+		fmt.Println(varName)
+	}
+}

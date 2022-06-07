@@ -28,22 +28,22 @@ func HandleRegisterPost(username string, password string) (model.UserLoginRespon
 			Username: username,
 			Password: password,
 		}
+
 		// 数据库插入新用户
 		repository.InsertNewUser(user)
 		newUser := repository.FindUserByUserName(username)
 		userId = int(newUser.Id)
 		token, _ = utils.CreateToken(newUser)
+		// 创建新用户表
+		userInfo := model.UserInformation{
+			Name:          newUser.Username,
+			FollowCount:   0,
+			FollowerCount: 0,
+			UserId:        newUser.Id,
+		}
+		repository.InsertNewUserInformation(userInfo)
 	}
 	// 更新并返回响应
-	resp := generateUserLoginResponse(int32(statusCode), statusMsg, userId, token)
+	resp := utils.GenerateUserLoginResponse(int32(statusCode), statusMsg, userId, token)
 	return resp, err
-}
-
-func generateUserLoginResponse(statusCode int32, statusMsg string, userId int, token string) model.UserLoginResponse {
-	return model.UserLoginResponse{
-		StatusCode: statusCode,
-		StatusMsg:  statusMsg,
-		UserId:     userId,
-		Token:      token,
-	}
 }

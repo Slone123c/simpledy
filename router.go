@@ -13,19 +13,19 @@ func initRouter(r *gin.Engine) {
 	apiRouter := r.Group("/douyin")
 
 	// basic apis
-	//apiRouter.GET("/feed/", handler.Feed)
-	//apiRouter.GET("/user/", handler.UserInfo)
+	//apiRouter.GET("/feed/", service.Feed)
+	apiRouter.GET("/user/", service.UserInfo)
 	apiRouter.POST("/user/register/", service.Register)
-	// apiRouter.POST("/user/login/", handler.Login)
-	//apiRouter.POST("/publish/action/", handler.Publish)
-	//apiRouter.GET("/publish/list/", handler.PublishList)
+	apiRouter.POST("/user/login/", service.Login)
+	//apiRouter.POST("/publish/action/", service.Publish)
+	//apiRouter.GET("/publish/list/", service.PublishList)
 
 	// extra apis - I
-	apiRouter.POST("/favorite/action/", service.FavoriteAction)
+	//apiRouter.POST("/favorite/action/", service.FavoriteAction)
 	//apiRouter.GET("/favorite/list/", handler.FavoriteList)
 	//apiRouter.POST("/comment/action/", handler.CommentAction)
 	//apiRouter.GET("/comment/list/", handler.CommentList)
-
+	//
 	//extra apis - II
 	//apiRouter.POST("/relation/action/", handler.RelationAction)
 	//apiRouter.GET("/relation/follow/list/", handler.FollowList)

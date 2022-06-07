@@ -19,7 +19,7 @@ func CreateToken(user model.User) (string, error) {
 	// 设置加密算法 和 Claims
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		// 定义 Claims 结构体
-		"id":          user.Id,
+		"userId":      user.Id,
 		"username":    user.Username,
 		"expiredTime": expirationTime,
 	})
@@ -31,7 +31,7 @@ func CreateToken(user model.User) (string, error) {
 	return tokenString, err
 }
 
-func ParseToken(tokenString string) (*jwt.Token, jwt.MapClaims) {
+func ParseToken(tokenString string) (jwt.MapClaims, error) {
 
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		return jwtKey, nil
@@ -40,17 +40,20 @@ func ParseToken(tokenString string) (*jwt.Token, jwt.MapClaims) {
 	if token.Valid {
 		fmt.Println("令牌有效。")
 	} else if errors.Is(err, jwt.ErrTokenMalformed) {
-		fmt.Println("无效令牌。")
+		fmt.Println("无效令牌")
+		err = errors.New("无效令牌")
 	} else if errors.Is(err, jwt.ErrTokenExpired) || errors.Is(err, jwt.ErrTokenNotValidYet) {
 		// Token is either expired or not active yet
-		fmt.Println("令牌已过期。")
+		fmt.Println("令牌已过期")
+		err = errors.New("令牌已过期")
 	} else {
-		fmt.Println("无法处理令牌：", err)
+		fmt.Println("无法处理令牌", err)
+		err = errors.New("无法处理令牌")
 	}
 	claims, ok := token.Claims.(jwt.MapClaims)
 
 	if ok && token.Valid {
-		return token, claims
+		return claims, err
 	} else {
 		return nil, nil
 	}

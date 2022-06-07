@@ -9,26 +9,28 @@ import (
 
 /*
 type User struct {
-	gorm.Model
+	Id       int64  `gorm:"size:64;not null"`
 	Username string `gorm:"size:32;not null"`
 	Password string `gorm:"size:32;not null"`
 }
 
+
 */
 var user = model.User{}
 var db, _ = driver.InitDB()
-var e = reflect.ValueOf(&user).Elem() // 用于取得数据库对象名称
+var euser = reflect.ValueOf(&user).Elem() // 用于取得数据库对象名称
 /*
-i = 0, gorm.Model
+i = 0, Id
 i = 1, Username
 i = 2, Password
-varName = e.Type().Field(i).Name
+varName = euser.Type().Field(i).Name
 */
 var varName string
 
 // 查询语句
 func IfUserExistsById(id int) bool {
-	result := db.First(&user, id)
+	varName = euser.Type().Field(0).Name
+	result := db.Where(varName+" = ?", id).Find(&user)
 	if result.RowsAffected > 0 {
 		return true
 	}
@@ -36,8 +38,8 @@ func IfUserExistsById(id int) bool {
 }
 
 func IfUserExistsByUsername(name string) bool {
-	varName = e.Type().Field(1).Name
-	result := db.Where(varName+" = ?", name).First(&user)
+	varName = euser.Type().Field(1).Name
+	result := db.Where(varName+" = ?", name).Find(&user)
 	if result.RowsAffected > 0 {
 		return true
 	}
@@ -46,8 +48,15 @@ func IfUserExistsByUsername(name string) bool {
 
 func FindUserByUserName(username string) model.User {
 	var result model.User
-	varName = e.Type().Field(1).Name
+	varName = euser.Type().Field(1).Name
 	db.Model(model.User{}).Where(varName+" = ?", username).Scan(&result)
+	return result
+}
+
+func FindUserByUserId(userId int) model.User {
+	var result model.User
+	varName = euser.Type().Field(0).Name
+	db.Model(model.User{}).Where(varName+" = ?", userId).Scan(&result)
 	return result
 }
 
@@ -58,9 +67,15 @@ func InsertNewUser(user model.User) int {
 	return int(db.RowsAffected)
 }
 
+func InsertNewUserInformation(userinfo model.UserInformation) int {
+	db.Create(&userinfo)
+	fmt.Println("新用户信息已创建！")
+	return int(db.RowsAffected)
+}
+
 // 删除语句
 func DeleteUserByUsername(username string) bool {
-	varName = e.Type().Field(1).Name
+	varName = euser.Type().Field(1).Name
 	res := db.Where(varName+" = ?", username).Unscoped().Delete(&user)
 	affected := res.RowsAffected
 	if affected > 0 {

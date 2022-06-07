@@ -29,12 +29,11 @@ func TestCreateToken(t *testing.T) {
 
 func TestParseToken(t *testing.T) {
 	tokenString, err := utils.CreateToken(testUser)
-	tokenString, err = utils.CreateToken(user)
 	if err != nil {
 		panic(err)
 	}
-	_, claims := utils.ParseToken(tokenString)
+	claims, err := utils.ParseToken(tokenString)
 
-	assert.Equal(t, claims["id"], int64(1))
+	assert.Equal(t, claims["userId"], float64(1))
 	assert.Equal(t, claims["username"], "zhangsan")
 }

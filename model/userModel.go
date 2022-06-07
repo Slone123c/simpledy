@@ -8,7 +8,7 @@ type User struct {
 
 type UserInformation struct {
 	Id            int64  `gorm:"size:64;not null"`
-	Name          string `gorm:"size:32;not null"`
+	Name          string `gorm:"size:32;not null"` // 用户名称
 	FollowCount   int64  `gorm:"size:64;not null"`
 	FollowerCount int64  `gorm:"size:64;not null"`
 	// 使得 UserId 成为外键并关联至 User 表
