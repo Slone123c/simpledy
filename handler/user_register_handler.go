@@ -16,12 +16,12 @@ func HandleRegisterPost(username string, password string) (model.UserLoginRespon
 	var err error
 	exist := repository.IfUserExistsByUsername(username)
 	if exist {
-		statusCode = -1
+		statusCode = 1
 		err = errors.New("用户名已存在")
 		statusMsg = err.Error()
 	} else {
 		// 设置响应消息
-		statusCode = 1
+		statusCode = 0
 		statusMsg = "用户注册成功"
 		// 创建新用户
 		user := model.User{
