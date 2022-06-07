@@ -11,9 +11,9 @@ func GenerateUserLoginResponse(statusCode int32, statusMsg string, userId int, t
 	}
 }
 
-func GenerateUserInfoResponse(statusCode int32, statusMsg string, information model.UserInformation) model.UserInfoResponse {
+func GenerateUserInfoResponse(statusCode int32, statusMsg string, information model.UserInformation, userId int64) model.UserInfoResponse {
 	userRsp := model.UserRsp{
-		ID:            information.Id,
+		ID:            userId,
 		Name:          information.Name,
 		FollowCount:   information.FollowCount,
 		FollowerCount: information.FollowerCount,

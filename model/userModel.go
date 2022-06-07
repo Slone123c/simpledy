@@ -4,6 +4,9 @@ type User struct {
 	Id       int64  `gorm:"size:64;not null"`
 	Username string `gorm:"size:32;not null"`
 	Password string `gorm:"size:32;not null"`
+	//	FollowCount   int64  `json:"follow_count,omitempty"`
+	//	FollowerCount int64  `json:"follower_count,omitempty"`
+	//	IsFollow      bool   `json:"is_follow,omitempty"`
 }
 
 type UserInformation struct {

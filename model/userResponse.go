@@ -10,7 +10,7 @@ type UserLoginResponse struct {
 type UserInfoResponse struct {
 	StatusCode int32   `json:"status_code"` // 状态码，0-成功，其他值-失败
 	StatusMsg  string  `json:"status_msg"`  // 返回状态描述
-	UserRsp    UserRsp `json:"UserRsp"`
+	UserRsp    UserRsp `json:"user"`
 }
 
 type UserRsp struct {

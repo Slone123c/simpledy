@@ -28,36 +28,19 @@ varName = euser.Type().Field(i).Name
 var varName string
 
 // 查询语句
-func IfUserExistsById(id int) bool {
-	varName = euser.Type().Field(0).Name
-	result := db.Where(varName+" = ?", id).Find(&user)
-	if result.RowsAffected > 0 {
-		return true
-	}
-	return false
-}
 
-func IfUserExistsByUsername(name string) bool {
-	varName = euser.Type().Field(1).Name
-	result := db.Where(varName+" = ?", name).Find(&user)
-	if result.RowsAffected > 0 {
-		return true
-	}
-	return false
-}
-
-func FindUserByUserName(username string) model.User {
+func FindUserByUserName(username string) (model.User, int) {
 	var result model.User
 	varName = euser.Type().Field(1).Name
-	db.Model(model.User{}).Where(varName+" = ?", username).Scan(&result)
-	return result
+	res := db.Model(model.User{}).Where(varName+" = ?", username).Scan(&result)
+	return result, int(res.RowsAffected)
 }
 
-func FindUserByUserId(userId int) model.User {
+func FindUserByUserId(userId int) (model.User, int) {
 	var result model.User
 	varName = euser.Type().Field(0).Name
-	db.Model(model.User{}).Where(varName+" = ?", userId).Scan(&result)
-	return result
+	res := db.Model(model.User{}).Where(varName+" = ?", userId).Scan(&result)
+	return result, int(res.RowsAffected)
 }
 
 // 增加语句

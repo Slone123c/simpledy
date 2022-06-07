@@ -14,9 +14,10 @@ func HandleLoginPost(username string, password string) (model.UserLoginResponse,
 	var userId = 0
 	var token = ""
 	var err error
-	exist := repository.IfUserExistsByUsername(username)
-	if exist {
-		user := repository.FindUserByUserName(username)
+	// 检查用户是否存在
+	user, res := repository.FindUserByUserName(username)
+
+	if res == 1 {
 		// 验证密码
 		if user.Password == password {
 			statusCode = 0
@@ -28,9 +29,7 @@ func HandleLoginPost(username string, password string) (model.UserLoginResponse,
 			statusMsg = "密码错误"
 			err = errors.New("用户密码输入错误")
 		}
-		// 检查用户是否存在
 	} else {
-
 		// 设置响应消息
 		statusCode = -1
 		statusMsg = "用户名不存在"

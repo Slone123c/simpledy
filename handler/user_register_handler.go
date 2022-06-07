@@ -14,8 +14,8 @@ func HandleRegisterPost(username string, password string) (model.UserLoginRespon
 	var userId = 0
 	var token = ""
 	var err error
-	exist := repository.IfUserExistsByUsername(username)
-	if exist {
+	_, exist := repository.FindUserByUserName(username)
+	if exist > 0 {
 		statusCode = 1
 		err = errors.New("用户名已存在")
 		statusMsg = err.Error()
@@ -31,7 +31,7 @@ func HandleRegisterPost(username string, password string) (model.UserLoginRespon
 
 		// 数据库插入新用户
 		repository.InsertNewUser(user)
-		newUser := repository.FindUserByUserName(username)
+		newUser, _ := repository.FindUserByUserName(username)
 		userId = int(newUser.Id)
 		token, _ = utils.CreateToken(newUser)
 		// 创建新用户表
