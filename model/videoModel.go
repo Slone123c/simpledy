@@ -1,7 +1,7 @@
 package model
 
 type Video struct {
-	Id            int64 `gorm:"size:64;not null"`
+	Id            int64 `gorm:"primaryKey"`
 	User          User  `gorm:"ForeignKey:AuthorId"`
 	AuthorId      int64
 	PlayUrl       string `gorm:"size:255;not null"`
@@ -10,4 +10,5 @@ type Video struct {
 	CommentCount  int64  `gorm:"size:32;not null"`
 	IsFavorite    bool   `gorm:"default:false;not null"`
 	Title         string `gorm:"size:64;not null"`
+	CreatedAt     int64
 }

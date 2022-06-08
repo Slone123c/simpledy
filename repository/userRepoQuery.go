@@ -45,15 +45,15 @@ func FindUserByUserId(userId int) (model.User, int) {
 
 // 增加语句
 func InsertNewUser(user model.User) int {
-	db.Create(&user)
+	res := db.Create(&user)
 	fmt.Println("新用户创建成功！", "用户名: "+user.Username)
-	return int(db.RowsAffected)
+	return int(res.RowsAffected)
 }
 
 func InsertNewUserInformation(userinfo model.UserInformation) int {
-	db.Create(&userinfo)
+	res := db.Create(&userinfo)
 	fmt.Println("新用户信息已创建！")
-	return int(db.RowsAffected)
+	return int(res.RowsAffected)
 }
 
 // 删除语句

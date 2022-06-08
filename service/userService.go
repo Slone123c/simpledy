@@ -56,6 +56,12 @@ func UserInfo(c *gin.Context) {
 }
 
 func Feed(c *gin.Context) {
-	latest_time := c.Query("latest_time")
+	latestTime, _ := strconv.Atoi(c.Query("latest_time"))
 	token := c.Query("token")
+	resp := handler.HandleVideoFeedGet(latestTime, token)
+	//if err != nil {
+	//	log.Print(err)
+	//}
+	c.JSON(http.StatusOK, resp)
+
 }
