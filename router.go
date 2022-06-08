@@ -13,7 +13,7 @@ func initRouter(r *gin.Engine) {
 	apiRouter := r.Group("/douyin")
 
 	// basic apis
-	//apiRouter.GET("/feed/", service.Feed)
+	apiRouter.GET("/feed/", service.Feed)
 	apiRouter.GET("/user/", service.UserInfo)
 	apiRouter.POST("/user/register/", service.Register)
 	apiRouter.POST("/user/login/", service.Login)

@@ -23,6 +23,6 @@ func HandleInfoGet(userId int, token string) (model.UserInfoResponse, error) {
 		err = errors.New("验证用户失败")
 	}
 	// 更新并返回响应
-	resp := utils.GenerateUserInfoResponse(int32(statusCode), statusMsg, userInfo, int64(userId))
+	resp := model.GenerateUserInfoResponse(int32(statusCode), statusMsg, userInfo, int64(userId))
 	return resp, err
 }

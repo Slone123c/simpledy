@@ -36,6 +36,6 @@ func HandleLoginPost(username string, password string) (model.UserLoginResponse,
 		err = errors.New("用户名不存在")
 	}
 	// 更新并返回响应
-	resp := utils.GenerateUserLoginResponse(int32(statusCode), statusMsg, userId, token)
+	resp := model.GenerateUserLoginResponse(int32(statusCode), statusMsg, userId, token)
 	return resp, err
 }

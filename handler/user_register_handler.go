@@ -44,6 +44,6 @@ func HandleRegisterPost(username string, password string) (model.UserLoginRespon
 		repository.InsertNewUserInformation(userInfo)
 	}
 	// 更新并返回响应
-	resp := utils.GenerateUserLoginResponse(int32(statusCode), statusMsg, userId, token)
+	resp := model.GenerateUserLoginResponse(int32(statusCode), statusMsg, userId, token)
 	return resp, err
 }

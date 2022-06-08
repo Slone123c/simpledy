@@ -36,31 +36,6 @@ func Login(c *gin.Context) {
 	c.JSON(http.StatusOK, resp)
 }
 
-type Response struct {
-	StatusCode int32  `json:"status_code"`
-	StatusMsg  string `json:"status_msg,omitempty"`
-}
-type User struct {
-	Id            int64  `json:"id,omitempty"`
-	Name          string `json:"name,omitempty"`
-	FollowCount   int64  `json:"follow_count,omitempty"`
-	FollowerCount int64  `json:"follower_count,omitempty"`
-	IsFollow      bool   `json:"is_follow,omitempty"`
-}
-
-type UserResponse struct {
-	Response
-	User User `json:"user"`
-}
-
-var testU = User{
-	Id:            1,
-	Name:          "zhanglei",
-	FollowCount:   10,
-	FollowerCount: 5,
-	IsFollow:      true,
-}
-
 func UserInfo(c *gin.Context) {
 
 	token := c.Query("token")
@@ -78,4 +53,9 @@ func UserInfo(c *gin.Context) {
 	//	User:     testU,
 	//})
 
+}
+
+func Feed(c *gin.Context) {
+	latest_time := c.Query("latest_time")
+	token := c.Query("token")
 }
