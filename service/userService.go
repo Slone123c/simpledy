@@ -37,7 +37,6 @@ func Login(c *gin.Context) {
 }
 
 func UserInfo(c *gin.Context) {
-
 	token := c.Query("token")
 	id_string := c.Query("user_id")
 	id, _ := strconv.Atoi(id_string)
@@ -64,4 +63,10 @@ func Feed(c *gin.Context) {
 	//}
 	c.JSON(http.StatusOK, resp)
 
+}
+
+func PublishList(c *gin.Context) {
+	token := c.Query("token")
+	resp := handler.HandlePublishListGet(token)
+	c.JSON(http.StatusOK, resp)
 }

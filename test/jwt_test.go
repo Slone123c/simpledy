@@ -37,3 +37,10 @@ func TestParseToken(t *testing.T) {
 	assert.Equal(t, claims["userId"], float64(1))
 	assert.Equal(t, claims["username"], "zhangsan")
 }
+
+func TestMyToken(t *testing.T) {
+	tokenString := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVkVGltZSI6IjIwMjItMDYtMTBUMTE6NDY6MDguOTMxMzUwNiswODowMCIsInVzZXJJZCI6MTIsInVzZXJuYW1lIjoidGVzdG1lIn0.BxFim5wCNV4n4_kw2EAYq07frwZ_u1-CVLLR8JO6QHY"
+	claims, _ := utils.ParseToken(tokenString)
+	fmt.Println(claims["userId"])
+	fmt.Println(claims["username"])
+}

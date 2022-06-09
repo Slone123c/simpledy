@@ -50,3 +50,29 @@ func GenerateVideoFeedResponse(statusCode int64, statusMsg string, nextTime int6
 		VideoList:  videoList,
 	}
 }
+
+func GeneratePulishListResponse(statusCode int64, statusMsg string, videos []Video, authorInfo UserInformation) PublishListResponse {
+	videoList := make([]VideoList, len(videos))
+	author := author{
+		FollowCount:   authorInfo.FollowerCount,
+		FollowerCount: authorInfo.FollowerCount,
+		ID:            authorInfo.Id,
+		IsFollow:      false,
+		Name:          authorInfo.Name,
+	}
+	for i := 0; i < len(videos); i++ {
+		videoList[i].ID = videos[i].Id
+		videoList[i].PlayURL = videos[i].PlayUrl
+		videoList[i].CoverURL = videos[i].CoverUrl
+		videoList[i].FavoriteCount = videos[i].FavoriteCount
+		videoList[i].CommentCount = videos[i].CommentCount
+		videoList[i].IsFavorite = videos[i].IsFavorite
+		videoList[i].Title = videos[i].Title
+		videoList[i].Author = author
+	}
+	return PublishListResponse{
+		StatusCode: statusCode,
+		StatusMsg:  statusMsg,
+		VideoList:  videoList,
+	}
+}
