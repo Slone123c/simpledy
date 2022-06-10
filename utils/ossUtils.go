@@ -7,8 +7,8 @@ import (
 )
 
 var myBucket = "simpledy"
-var myAccessKeyId = "LTAI5t9Na736WxVs5yy4KDu8"
-var myAccessKeySecret = "tR4PjMXmAX15aLrKy0KYff3y81sElU"
+var myAccessKeyId = ""
+var myAccessKeySecret = ""
 
 func handleError(err error) {
 	fmt.Println("Error:", err)
