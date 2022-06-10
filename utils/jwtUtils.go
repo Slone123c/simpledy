@@ -59,3 +59,9 @@ func ParseToken(tokenString string) (jwt.MapClaims, error) {
 	}
 
 }
+
+func ParseTokenAndGetUserId(tokenString string) int {
+	claims, _ := ParseToken(tokenString)
+	userId := claims["userId"].(float64)
+	return int(userId)
+}

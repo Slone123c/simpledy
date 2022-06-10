@@ -76,3 +76,10 @@ func GeneratePulishListResponse(statusCode int64, statusMsg string, videos []Vid
 		VideoList:  videoList,
 	}
 }
+
+func GenerateVideoPublishResponse(statusCode int64, statusMsg string) VideoPublishResponse {
+	return VideoPublishResponse{
+		StatusCode: statusCode,
+		StatusMsg:  statusMsg,
+	}
+}

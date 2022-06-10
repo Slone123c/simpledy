@@ -24,3 +24,7 @@ func TestHandleRegisterPost(t *testing.T) {
 	res, _ = handler.HandleRegisterPost(name, pwd)
 	assert.Equal(t, int32(1), res.StatusCode)
 }
+
+//func TestHandlePublishPost(t *testing.T)  {
+//	res := handler.HandlePublishPost()
+//}

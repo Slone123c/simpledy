@@ -70,3 +70,18 @@ func PublishList(c *gin.Context) {
 	resp := handler.HandlePublishListGet(token)
 	c.JSON(http.StatusOK, resp)
 }
+
+func Publish(c *gin.Context) {
+	data, _ := c.FormFile("data")
+	token := c.PostForm("token")
+	title := c.PostForm("title")
+	if err := c.SaveUploadedFile(data, "./static_data/videos/"+data.Filename); err != nil {
+		fmt.Println(err)
+	}
+	//
+	resp := handler.HandlePublishPost(data.Filename, token, title)
+	fmt.Println("file uploaded:", data.Filename)
+	fmt.Println("This is token:", token)
+	fmt.Println("This is title:", title)
+	c.JSON(http.StatusOK, resp)
+}

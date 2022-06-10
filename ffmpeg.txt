@@ -1,0 +1,2 @@
+ffmpeg -i test.mp4 -ss 1 -f image2 image.jpeg
+ffmpeg -i test.mp4 -r 1 -f image2 image-%05d.jpeg

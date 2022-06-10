@@ -19,6 +19,12 @@ func FindVideosBefore(time int) ([]model.Video, int) {
 	return videos, int(res.RowsAffected)
 }
 
+func FindVideosAfter(time int) ([]model.Video, int) {
+	var videos []model.Video
+	res := db.Debug().Limit(30).Model(model.Video{}).Order("created_at DESC").Where("created_at >= ?", time).Find(&videos)
+	return videos, int(res.RowsAffected)
+}
+
 func FindVideosByUserId(userId int) ([]model.Video, int) {
 	var videos []model.Video
 	res := db.Debug().Model(model.Video{}).Where("author_id = ?", userId).Find(&videos)
