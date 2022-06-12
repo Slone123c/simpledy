@@ -6,12 +6,13 @@ import (
 	"simpledy/model"
 	"simpledy/repository"
 	"simpledy/utils"
+	"strconv"
 	"time"
 )
 
 var snapshotPath = utils.GetCoverPath()
 var videoPath = utils.GetVideoPath()
-var url = "simpledy.oss-cn-hangzhou.aliyuncs.com"
+var url = "https://simpledy.oss-cn-hangzhou.aliyuncs.com/"
 
 func HandlePublishPost(videoFileName string, token string, title string) model.VideoPublishResponse {
 	fmt.Println("封面路径:", snapshotPath)
@@ -30,19 +31,21 @@ func HandlePublishPost(videoFileName string, token string, title string) model.V
 	videoObjectPath := "videos/"
 	coverObjectPath := "covers/"
 	// OSS数据库中的文件路径
-	videoObjectPath = videoObjectPath + videoFileName // 例: videos/VIDEO_20220609_155429105.MP4
-	coverObjectPath = coverObjectPath + snapshotName  // 例: covers/VIDEO_20220609_155429105.png
+	time := time.Now().Unix()
+	var createdTime = strconv.Itoa(int(time))
+	videoObjectPath = videoObjectPath + createdTime // 例: videos/VIDEO_20220609_155429105.MP4
+	coverObjectPath = coverObjectPath + createdTime // 例: covers/VIDEO_20220609_155429105.png
 	//本地图片文件路径
 	// 例如 H:\simpledy-0.2.0\static_data\covers\VIDEO_20220609_155429105.png
 	snapshotFilePath := filepath.Join(snapshotPath, snapshotName)
 	// 向 OSS数据库上传文件
 	utils.UploadFile(snapshotFilePath, coverObjectPath)
 	utils.UploadFile(videoFilePath, videoObjectPath)
-	playUrl := url + "videos/" + videoFileName
-	coverUrl := url + "covers/" + snapshotName
+	playUrl := url + "videos/" + createdTime
+	coverUrl := url + "covers/" + createdTime
 	fmt.Println("playUrl:", playUrl)
 	fmt.Println("coverUrl:", coverUrl)
-	video.CreatedAt = time.Now().Unix()
+	video.CreatedAt = time
 	video.AuthorId = int64(userId)
 	video.Title = title
 	video.PlayUrl = playUrl
