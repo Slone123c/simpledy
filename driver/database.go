@@ -43,7 +43,8 @@ func InitTable() {
 	db.AutoMigrate(&model.UserInformation{})
 	//建立Video表
 	db.AutoMigrate(&model.Video{})
-
+	//建立Favorite表
+	//db.AutoMigrate(&model.Favorite{})
 	// m4 := db.Migrator()
 	// err4 := m4.CreateTable(&model.Comment{})
 	// if err4 != nil {

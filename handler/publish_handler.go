@@ -39,8 +39,10 @@ func HandlePublishPost(videoFileName string, token string, title string) model.V
 	// 例如 H:\simpledy-0.2.0\static_data\covers\VIDEO_20220609_155429105.png
 	snapshotFilePath := filepath.Join(snapshotPath, snapshotName)
 	// 向 OSS数据库上传文件
-	utils.UploadFile(snapshotFilePath, coverObjectPath)
-	utils.UploadFile(videoFilePath, videoObjectPath)
+	//utils.UploadFile(snapshotFilePath, coverObjectPath)
+	//utils.UploadFile(videoFilePath, videoObjectPath)
+	utils.UploadFileSlices(snapshotFilePath, coverObjectPath)
+	utils.UploadFileSlices(videoFilePath, videoObjectPath)
 	playUrl := url + "videos/" + createdTime
 	coverUrl := url + "covers/" + createdTime
 	fmt.Println("playUrl:", playUrl)

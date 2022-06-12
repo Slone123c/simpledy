@@ -1,8 +1,10 @@
 package test
 
 import (
+	"fmt"
 	"simpledy/driver"
 	"simpledy/model"
+	"simpledy/repository"
 	"testing"
 )
 
@@ -20,4 +22,9 @@ func TestDatabase(t *testing.T) {
 func TestCustomDb(t *testing.T) {
 	db, _ := driver.InitDB()
 	db.AutoMigrate(&model.Video{})
+}
+func TestFindNewestVideoTime(t *testing.T) {
+	video, num := repository.FindLatestVideo()
+	fmt.Println("found :", num)
+	fmt.Println(video.CreatedAt)
 }
