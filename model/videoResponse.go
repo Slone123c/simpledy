@@ -17,7 +17,7 @@ type PublishListResponse struct {
 }
 
 type VideoList struct {
-	Author        author `json:"author,omitempty"`         // 视频作者信息
+	Author        Author `json:"author,omitempty"`         // 视频作者信息
 	CommentCount  int64  `json:"comment_count,omitempty"`  // 视频的评论总数
 	CoverURL      string `json:"cover_url,omitempty"`      // 视频封面地址
 	FavoriteCount int64  `json:"favorite_count,omitempty"` // 视频的点赞总数
@@ -28,7 +28,7 @@ type VideoList struct {
 }
 
 // 视频作者信息
-type author struct {
+type Author struct {
 	FollowCount   int64  `json:"follow_count"`   // 关注总数
 	FollowerCount int64  `json:"follower_count"` // 粉丝总数
 	ID            int64  `json:"id"`             // 用户id

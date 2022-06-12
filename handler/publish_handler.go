@@ -18,7 +18,7 @@ func HandlePublishPost(videoFileName string, token string, title string) model.V
 	fmt.Println("封面路径:", snapshotPath)
 	fmt.Println("视频路径", videoPath)
 
-	userId := utils.ParseTokenAndGetUserId(token)
+	userId, _ := utils.ParseTokenAndGetUserId(token)
 	var video model.Video
 	// 取得本地视频和封面文件绝对路径
 	videoFilePath := filepath.Join(videoPath, videoFileName) // 视频文件的完整目录

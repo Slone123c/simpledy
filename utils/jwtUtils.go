@@ -60,8 +60,29 @@ func ParseToken(tokenString string) (jwt.MapClaims, error) {
 
 }
 
-func ParseTokenAndGetUserId(tokenString string) int {
-	claims, _ := ParseToken(tokenString)
+func AuthUser(userId int, token string) (bool, string) {
+	ok := false
+	returnMsg := ""
+	tokenUserId, err := ParseTokenAndGetUserId(token)
+	if err != nil {
+		fmt.Println("1：")
+		return ok, err.Error()
+	}
+	// 验证 token
+	fmt.Println("tokenid = ", tokenUserId)
+	fmt.Println("userid = ", userId)
+	if tokenUserId == userId {
+		returnMsg = "验证用户成功"
+		ok = true
+	} else {
+		fmt.Println("3：")
+		returnMsg = "验证用户失败"
+	}
+	return ok, returnMsg
+}
+
+func ParseTokenAndGetUserId(tokenString string) (int, error) {
+	claims, err := ParseToken(tokenString)
 	userId := claims["userId"].(float64)
-	return int(userId)
+	return int(userId), err
 }

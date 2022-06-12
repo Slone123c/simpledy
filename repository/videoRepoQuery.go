@@ -2,6 +2,7 @@ package repository
 
 import (
 	"fmt"
+	"gorm.io/gorm"
 	"simpledy/model"
 )
 
@@ -35,4 +36,14 @@ func FindVideosByUserId(userId int) ([]model.Video, int) {
 	var videos []model.Video
 	res := db.Debug().Model(model.Video{}).Where("author_id = ?", userId).Find(&videos)
 	return videos, int(res.RowsAffected)
+}
+
+// 改
+func UpdateVideoCommentNumberPlusOneByVideoId(videoId int) {
+	fmt.Println("评论数量更新！")
+	db.Debug().Model(&model.Video{}).Where("id = ?", videoId).Update("comment_count", gorm.Expr("comment_count + ?", 1))
+}
+func UpdateVideoCommentNumberMinusOneByVideoId(videoId int) {
+	fmt.Println("评论数量更新！")
+	db.Debug().Model(&model.Video{}).Where("id = ?", videoId).Update("comment_count", gorm.Expr("comment_count - ?", 1))
 }

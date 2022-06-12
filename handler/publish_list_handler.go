@@ -12,8 +12,6 @@ func HandlePublishListGet(token string) model.PublishListResponse {
 	var statusMsg = ""
 	claims, err := utils.ParseToken(token)
 	var userId int
-	//fmt.Println("userid =", claims["userId"])
-	//fmt.Println("useridInt =", claims["userId"].(int))
 	if err != nil {
 		log.Print(err)
 	}
