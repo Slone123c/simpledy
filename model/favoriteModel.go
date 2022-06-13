@@ -1,9 +1,10 @@
 package model
 
 type Favorite struct {
-	UserId2 int64
+	Id      int64
+	UserId  int64
 	VideoId int64
 	Video   Video           `gorm:"ForeignKey:VideoId"`
-	User    UserInformation `gorm:"ForeignKey:UserId2"`
+	User    UserInformation `gorm:"ForeignKey:UserId"`
 	// Video   Video `gorm:"ForeignKey:VideoId"`
 }

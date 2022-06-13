@@ -27,6 +27,12 @@ type VideoList struct {
 	Title         string `json:"title,omitempty"`          // 视频标题
 }
 
+type FavoriteListResponse struct {
+	StatusCode int64       `json:"status_code"` // 状态码，0-成功，其他值-失败
+	StatusMsg  string      `json:"status_msg"`  // 返回状态描述
+	VideoList  []VideoList `json:"video_list"`  // 视频列表
+}
+
 // 视频作者信息
 type Author struct {
 	FollowCount   int64  `json:"follow_count"`   // 关注总数

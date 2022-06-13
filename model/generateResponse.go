@@ -94,7 +94,8 @@ func GenerateFavoriteActionResponse(statusCode int32, statusMsg string) Favorite
 	}
 }
 
-func GenerateFavoriteListResponse(statusCode int64, statusMsg string, videos []Video, authorInfos []UserInformation) FavoriteListResponse {
+func GenerateFavoriteListResponse(statusCode int64, statusMsg string,
+	videos []Video, authorInfos []UserInformation) FavoriteListResponse {
 	authorList := make([]Author, len(authorInfos))
 	videoList := make([]VideoList, len(videos))
 	for j := 0; j < len(authorInfos); j++ {
@@ -115,7 +116,7 @@ func GenerateFavoriteListResponse(statusCode int64, statusMsg string, videos []V
 		videoList[i].Author = authorList[i]
 	}
 	return FavoriteListResponse{
-		StatusCode: int32(statusCode),
+		StatusCode: statusCode,
 		StatusMsg:  statusMsg,
 		VideoList:  videoList,
 	}
@@ -161,4 +162,21 @@ func GenerateCommentListResponse(statusCode int, statusMsg string, comments []Co
 		}
 	}
 
+}
+
+func GenerateRelationFollowListResponse(statusCode int64, statusMsg string,
+	follows []UserInformation) RelationFollowListResponseAll {
+	followList := make([]RelationFollowListResponseUserList, len(follows))
+	for i := 0; i < len(follows); i++ {
+		followList[i].ID = follows[i].Id
+		followList[i].Name = follows[i].Name
+		followList[i].FollowCount = follows[i].FollowCount
+		followList[i].FollowerCount = follows[i].FollowerCount
+		followList[i].IsFollow = true
+	}
+	return RelationFollowListResponseAll{
+		StatusCode: int32(statusCode),
+		StatusMsg:  statusMsg,
+		UserList:   followList,
+	}
 }

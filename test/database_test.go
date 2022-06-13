@@ -19,7 +19,7 @@ func TestDatabase(t *testing.T) {
 }
 
 func TestCustomDb(t *testing.T) {
-
+	driver.InitTable()
 }
 func TestFindNewestVideoTime(t *testing.T) {
 	video, num := repository.FindLatestVideo()

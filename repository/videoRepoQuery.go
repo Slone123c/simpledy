@@ -47,3 +47,12 @@ func UpdateVideoCommentNumberMinusOneByVideoId(videoId int) {
 	fmt.Println("评论数量更新！")
 	db.Debug().Model(&model.Video{}).Where("id = ?", videoId).Update("comment_count", gorm.Expr("comment_count - ?", 1))
 }
+
+func UpdateVideoFavoriteNumberMinusOneByVideoId(videoId int) {
+	fmt.Println("评论数量更新！")
+	db.Debug().Model(&model.Video{}).Where("id = ?", videoId).Update("favorite_count", gorm.Expr("favorite_count - ?", 1))
+}
+func UpdateVideoFavoriteNumberPlusOneByVideoId(videoId int) {
+	fmt.Println("评论数量更新！")
+	db.Debug().Model(&model.Video{}).Where("id = ?", videoId).Update("favorite_count", gorm.Expr("favorite_count + ?", 1))
+}

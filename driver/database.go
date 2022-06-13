@@ -45,14 +45,11 @@ func InitTable() {
 	db.AutoMigrate(&model.Video{})
 	//建立Favorite表
 	db.AutoMigrate(&model.Favorite{})
-	// m4 := db.Migrator()
-	// err4 := m4.CreateTable(&model.Comment{})
-	// if err4 != nil {
-	// 	fmt.Println("建立Comment表失败")
-	// } else {
-	// 	fmt.Println("建立Comment表成功......")
-	// }
-	// db.Create(&comment)
+	//建立Comment表
+	db.AutoMigrate(&model.Comment{})
+	//建立Relation表
+	db.AutoMigrate(&model.Relation{})
+
 }
 
 // 用来注入一些初始数据来方便测试
